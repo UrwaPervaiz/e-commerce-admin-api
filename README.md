@@ -9,7 +9,7 @@ Tech Stack
 - Extras: SQLAlchemy ORM, Uvicorn server
 Getting Started
 1. Clone the repository:
-   git clone https://github.com/UrwaPervaiz/ecommerce-admin-api.git
+   git clone https://github.com/yourusername/ecommerce-admin-api.git
    cd ecommerce-admin-api
 
 2. Create and activate a virtual environment (Windows):
@@ -70,3 +70,35 @@ Relationships Between Entities:
 - One-to-one or one-to-many between `Products` and `Inventory`: Inventory keeps stock information for each product.
 
 These relationships are used to join data efficiently for generating reports, filtering by category, and tracking inventory levels.
+2. Database Documentation
+Overview
+This project uses a relational database schema — by default, SQLite, though it can easily be switched to PostgreSQL or MySQL depending on your production needs. The database is designed to store, manage, and retrieve critical information for an e-commerce admin dashboard, such as product listings, sales records, inventory status, and categories.
+Tables and Their Purposes
+Products Table
+- Purpose: Stores all relevant information about each product.
+- Fields: id, name, description, price, category_id, created_at
+- Use Case: Allows the admin to view, add, update, or delete products.
+
+Sales Table
+- Purpose: Logs every sale made through the platform.
+- Fields: id, product_id, quantity, sale_price, sale_date
+- Use Case: Generates revenue reports and historical sales trends.
+
+Categories Table
+- Purpose: Groups products into meaningful categories for better organization and filtering.
+- Fields: id, name
+- Use Case: Supports filtering by category in the dashboard and comparing category-based performance.
+
+Inventory Table
+- Purpose: Manages current stock levels for each product and tracks low stock warnings.
+- Fields: id, product_id, quantity_in_stock, last_updated
+- Use Case: Helps ensure the store is always stocked and alerts the admin about low inventory.
+Entity Relationships
+- One-to-Many: Categories → Products (A single category can contain multiple products).
+- One-to-Many: Products → Sales (Each product can be sold multiple times).
+- One-to-One or One-to-Many: Products → Inventory (Each product has one current inventory record).
+Summary
+This database design ensures:
+- Data normalization to eliminate redundancy.
+- Query optimization through proper indexing (especially on foreign keys and frequently filtered fields).
+- Scalability to switch between SQLite (local/dev), PostgreSQL, or MySQL (prod).
